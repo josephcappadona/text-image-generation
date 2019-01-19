@@ -6,11 +6,6 @@ from re import sub, UNICODE
 from utils import create_base_img, trim, rotate, blur, skew, underline, apply_modification_and_save
 from PIL import Image, ImageDraw, ImageFont
 
-'''
-TODO:
-    * support option for character, word, sentence, and paragraph generation
-'''
-
 
 BASE_IMG_DIM = (1000, 100)
 TEXT_POS = (25,25)
