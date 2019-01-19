@@ -2,13 +2,33 @@ from PIL import Image, ImageChops, ImageFilter, ImageDraw, ImageFont
 from math import tan, pi
 
 
+def break_token_into_lines(token, chars_per_line):
+    space_chars = set(' \n\t')
+
+    new_token = ''
+    hold = False
+    for i, c in enumerate(token):
+        if (i+1) % chars_per_line == 0 or hold:
+            if c == ' ' or c == '\n':
+                new_token += '\n'
+                hold = False
+            else:
+                new_token += c
+                hold = True
+        else:
+            new_token += c
+
+    return new_token
+
+
 # adapted from https://code-maven.com/create-images-with-python-pil-pillow
-def create_base_img(word, font_fp, dim=(1000, 100), pos=(25,25), font_size=50, fill=0, bg=255):
+def create_base_img(word, font_fp, dim=(1000, 1000), pos=(15,15), font_size=25, fill=0, bg=255):
     img = Image.new('1', dim, color=bg)
     font = ImageFont.truetype(font_fp, font_size)
     draw = ImageDraw.Draw(img)
     draw.text(pos, word, font=font, fill=fill)
     return img
+
 
 # crop image to remove empty space around text
 # adapted from https://gist.github.com/mattjmorrison/932345
@@ -57,13 +77,14 @@ def blur(img, radius):
     return img.filter(ImageFilter.GaussianBlur(radius=radius))
 
 
-def underline(img, border, font_size):
+def underline(img, font_size, border):
     w, h = img.size
-    x, y = (border, border)
-    v_offset = int(0.15 * font_size)
     underlined = img.copy()
     draw = ImageDraw.Draw(underlined)
-    draw.line((x, y + h - v_offset, x + w - border, y + h - v_offset), fill=0, width=4)
+    h_line = font_size + 3
+    n_lines = int((h - 2*border) / h_line) + 1
+    for i in range(n_lines):
+        draw.line((border, h-border-i*h_line, w-border, h-border-i*h_line), fill=0, width=2)
     return underlined
 
 
