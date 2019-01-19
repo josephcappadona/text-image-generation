@@ -21,3 +21,5 @@ python src/generate_text_pics.py sample_text/lorem_ipsum.txt fonts/some/ -sbc
 ## TODO
 * add more fonts to `font/many/` folder
 * support option for character, word, sentence, and paragraph generation (currently only support word-level generation)
+* modularize argument parsing
+* make argument parsing more robust
