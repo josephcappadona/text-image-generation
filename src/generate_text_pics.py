@@ -41,7 +41,7 @@ else:
     words = set(corpus.split())
 
 font_dir = argv[2]
-font_fps = list(iglob(font_dir + '/*.ttf'))
+font_fps = list(iglob(font_dir + '/**/*.ttf'))
 font_names = [font_fp.split('/')[-1][:-4] for font_fp in font_fps]
 
 output_dir = 'output/'
