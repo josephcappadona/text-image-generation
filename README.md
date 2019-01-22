@@ -2,9 +2,16 @@ A library to generate pictures of text for the purposes of training machine lear
 
 ## Usage
 ```
-python generate_text_pics.py CORPUS.txt FONTS_DIR [-rsbucp]
+python generate_text_pics.py [-cwspa] CORPUS.txt FONTS_DIR [-rsbucp]
 
-Optional parameters create images in addition to an unmodified base image for each word in each font
+Optional parameters at the beginning of the command specify which tokens you would like to create (default is -w):
+-c: create images of the characters in the corpus
+-w: create images of the words in the corpus
+-s: create images of the sentences in the corpus
+-p: create images of the paragraphs in the corpus
+-a: create images of the entire corpus
+
+Optional parameters at the end of the command create images in addition to an unmodified base image for each word in each font:
 -r: create images that are rotated slightly CW and CCW
 -s: create images that are skewed slightly left and right
 -b: create images with a slight gaussian blur
@@ -19,7 +26,6 @@ python src/generate_text_pics.py sample_text/lorem_ipsum.txt fonts/some/ -sbc
 ```
 
 ## TODO
-* add more fonts to `font/many/` folder
-* support option for character, word, sentence, and paragraph generation (currently only support word-level generation)
 * modularize argument parsing
 * make argument parsing more robust
+
