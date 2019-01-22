@@ -22,7 +22,7 @@ Optional parameters at the end of the command create images in addition to an un
 
 ## Example
 ```
-python src/generate_text_pics.py sample_text/lorem_ipsum.txt fonts/some/ -sbc
+python src/generate_text_pics.py -wsp sample_text/lorem_ipsum.txt fonts/some/ -sbc
 ```
 
 ## TODO
