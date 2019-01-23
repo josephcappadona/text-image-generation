@@ -58,21 +58,21 @@ if do_all:
 paragraphs = set([(paragraph.strip(), 'paragraph') for paragraph in corpus.split('\n') if paragraph])
 if do_paragraphs:
     tokens.update(paragraphs)
-    print('Paragraphs (%d): %s' % (len(paragraphs), list(paragraphs)))
+    print('Paragraphs (%d): %s' % (len(paragraphs), list(zip(*paragraphs))[0]))
 sentences = set([(sentence, 'sentence') for paragraph, _ in paragraphs for sentence in paragraph.split('. ') if sentence])
 if do_sentences:
     tokens.update(sentences)
-    print('Sentences (%d): %s' % (len(sentences), list(sentences)))
-if do_remove_punctuation:
-    corpus = sub(r'[^\w\s]', '', corpus, UNICODE)
+    print('Sentences (%d): %s' % (len(sentences), list(zip(*sentences))[0]))
 words = set([(word, 'word') for sentence, _ in sentences for word in sentence.split(' ') if word])
+if do_remove_punctuation:
+    words = set([(sub(r'[^\w\s]', '', word, UNICODE), label) for word, label in words])
 if do_words:
     tokens.update(words)
-    print('Words (%d): %s' % (len(words), list(words)))
+    print('Words (%d): %s' % (len(words), list(zip(*words))[0]))
 characters = set([(character, 'character') for word, _ in words for character in word])
 if do_characters:
     tokens.update(characters)
-    print('Characters (%d): %s' % (len(characters), list(characters)))
+    print('Characters (%d): %s' % (len(characters), list(zip(*characters))[0]))
 
 # make output directory if necessary
 output_dir = 'output/'
