@@ -23,7 +23,7 @@ def break_token_into_lines(token, chars_per_line):
 
 # adapted from https://code-maven.com/create-images-with-python-pil-pillow
 def create_base_img(word, font_fp, dim=(1000, 1000), pos=(15,15), font_size=25, fill=0, bg=255):
-    img = Image.new('1', dim, color=bg)
+    img = Image.new('L', dim, color=bg)
     font = ImageFont.truetype(font_fp, font_size)
     draw = ImageDraw.Draw(img)
     draw.text(pos, word, font=font, fill=fill)
